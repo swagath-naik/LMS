@@ -1,0 +1,2 @@
+class FacultyProfile < ApplicationRecord
+end

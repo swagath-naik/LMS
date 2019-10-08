@@ -1,0 +1,83 @@
+
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div class="field">
+<%= radio_button_tag(:role, "admin") %>
+<%= label_tag(:role, "Admin") %>
+<%= radio_button_tag(:role, "student") %>
+<%= label_tag(:role, "Student") %>
+<%= radio_button_tag(:role, "faculty") %>
+<%= label_tag(:role, "Faculty") %>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+<div id="admin_form" class="field inactive">
+    <%= form.label :"Admin Key" %>
+    <%= form.text_field :key %>
+  </div>
+
+<div id="faculty_form" class="field inactive">
+    <%= form.label :"Faculty Name" %>
+    <%= form.text_field :fname %>
+    <%= form.label :"Designation" %>
+    <%= form.text_field :fdes %>
+  </div>
+
+<div id="student_form" class="field inactive">
+    <%= form.label :"Student Name" %>
+    <%= form.text_field :sname %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+$('load', function() {
+
+$("#role_admin").click(function(){
+  $("#admin_form").removeClass("inactive");
+  $("#faculty_form").addClass("inactive");
+  $("#student_form").addClass("inactive");
+});
+$("#role_student").click(function(){
+  $("#admin_form").addClass("inactive");
+  $("#faculty_form").addClass("inactive");
+  $("#student_form").removeClass("inactive");
+});
+$("#role_faculty").click(function(){
+  $("#admin_form").addClass("inactive");
+  $("#faculty_form").removeClass("inactive");
+  $("#student_form").addClass("inactive");
+}); 
+
+});
+ 
+</script>
+
+
