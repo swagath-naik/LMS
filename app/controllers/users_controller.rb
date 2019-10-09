@@ -50,9 +50,9 @@ class UsersController < ApplicationController
 		u.username = params[:user][:username]
 		u.password = params[:user][:password]
 		u.password_confirmation = params[:user][:password_confirmation]
-		u.profile = AdminProfile.create! do |p|
+		u.profile = FacultyProfile.create! do |p|
 			p.fname = params[:user][:fname]
-			p.des = params[:user][:fdes]
+			p.fdes = params[:user][:fdes]
 			end
 		end
         end
