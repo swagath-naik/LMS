@@ -1,0 +1,59 @@
+<%if current_user.id == @user.id then%>
+<div class="text-center">
+<p id="notice"><%= notice %></p>
+
+<h1>Issued Book Details</h1>
+
+
+<br>
+<%if @bookIssue.blank? then%>
+  <br><br><br>
+    <h4>No Books Currently Issued</h4>
+ <%else%>
+
+<table width="90%" class="new_table">
+<thead>
+  <tr>
+    <th>BookID</th>
+    <th>Borrower Name</th>
+    <th>Book Title</th>
+    <th>Book Author</th>
+    <th>Issue Date</th> 
+    <th>Return Date</th>       
+    
+    <th colspan="3"></th>
+  </tr>
+</thead>
+
+<tbody>
+  <% @bookIssue.each do |bookis| %>
+    <tr>
+      <td><%= bookis.BookId %></td>
+      <td><%= bookis.username %></td>
+            
+            <% @books.each do |book| %>
+                <%if bookis.BookId == book.bookId then%>
+                  <td><%= book.title %></td>
+                  <td><%= book.author %></td> 
+                <% end %>
+            <% end %>
+
+      <td><%= bookis.created_at.to_date %></td>
+      <td><%= bookis.created_at.to_date + 30%></td>         
+      
+    </tr>
+  <% end %>
+</tbody>
+</table>
+ <% end %>
+<br>
+
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<br>
+<%= link_to 'Back to Home', '/faculty/'+current_user.profile_id.to_s %>
+</div>

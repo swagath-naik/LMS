@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
+<div class="text-center">
+<%if current_user and current_user.admin? then%>
+<br>
+<p>
+  <strong>Book Id:</strong>
+  <%= @book.bookId %>
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -9,16 +16,19 @@
   <strong>Author:</strong>
   <%= @book.author %>
 </p>
-
 <p>
-  <strong>Total:</strong>
-  <%= @book.total %>
-</p>
-
-<p>
-  <strong>Left:</strong>
-  <%= @book.left %>
+  <strong>Issued:</strong>
+  <%= @book.issued %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', :action=>:index,:uid=>current_user.profile_id.to_s %><br>
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<br><br>
+<%= link_to 'Back to Home', user_home %>
+</div>

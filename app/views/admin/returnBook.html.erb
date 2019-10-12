@@ -1,0 +1,77 @@
+<%if  current_user and current_user.admin?  then%>
+<div class="text-center">
+<p id="notice"><%= notice %></p>
+
+<h3>Return Book</h3>
+
+<br>
+
+<%if @bookResults.blank? then%>
+  <br><br><br>
+    <h4> No Books Currently Issued To <%= @borrowername %> </h4>
+ <%else%>
+
+<h4>Books Issued To <%= @borrowername %> </h4>
+
+<br>
+
+<table width="90%" class="new_table table">
+<thead class="thead-light">
+  <tr>
+    <th>BookID</th>
+    <th>Book Title</th>
+    <th>Book Author</th>
+    <th>Issue Date</th>  
+    <th>No. of Days</th>
+    <th>Fine</th>
+    <th></th>
+	    
+    
+  </tr>
+</thead>
+
+<tbody>
+  <% @bookResults.each do |bookis| %>
+    <tr>
+      <td><%= bookis.BookId %></td>
+            
+            <% @books.each do |book| %>
+                <%if bookis.BookId == book.bookId then%>
+                  <td><%= book.title %></td>
+                  <td><%= book.author %></td> 
+                <% end %>
+            <% end %>
+      
+      <td><%= bookis.created_at.to_date %></td>  
+      <td><% nod= (($today)-(bookis.created_at.to_date)).to_i %>  <% nod+=1%> <%= nod%> 
+
+        <% if nod >= 31
+            then dues= (nod-30)*2
+          else
+            dues=0
+          end
+          %> 
+      </td>    
+      <td>    Rs.&nbsp<%= dues%> </td>
+      
+      <td><%= link_to 'Return', '/returnBook/'+bookis.BookId.to_s, class: "btn btn-primary btn-sm"%></td>
+      
+      
+
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<br>
+<% end %>
+<br>
+
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<%= link_to 'Back to Home', user_home %>
+</div>

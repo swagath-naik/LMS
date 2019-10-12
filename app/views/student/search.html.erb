@@ -1,0 +1,31 @@
+<%if current_user.id == @user.id then%>
+<div class="text-center">
+<h2>Student Page</h2>
+	<hr>
+<div >
+	<%= form_tag(controller: "student", action: "searchResult", method: "get") do %>
+	<h3 > <%= label_tag(:q, "Search Book") %></h3>
+	<br>
+	<div >
+  	  	<%= text_field_tag :searchKey, "",  placeholder: 'Enter Title/Author' %>
+  		
+	<% end %>
+		<br><br>
+  		<%= submit_tag("Search" , :id=>"button", :class=>"btn btn-success", :name=>"submit") %>
+  	</div>
+  
+</div>
+<br>
+
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<br>
+<%= link_to 'Back to Home', '/student/'+current_user.profile_id.to_s %>
+</div>
+
+
+

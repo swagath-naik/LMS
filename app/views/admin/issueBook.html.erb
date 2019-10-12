@@ -1,0 +1,70 @@
+<%if  current_user and current_user.admin?  then%>
+<div class="text-center">
+<p id="notice"><%= notice %></p>
+<h2>Issue Book</h2>
+</div>
+<div>
+
+  <%if @bookResults.blank? then%>
+  <br><br><br>
+    <h4 class="text-center">Sorry! Book Currently Unavailable </h4>
+ <%else%>
+<h4>Available Books</h4>
+
+
+
+<table width="60%" class="new_table table">
+  <thead class="thead-light">
+    <tr>
+      <th>BookID</th>
+      <th>Title</th>
+      <th>Author</th>      
+      <th>Issued</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bookResults.each do |book| %>
+      <tr>
+        <td><%= book.bookId %></td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>        
+        <td><%= book.issued %></td> 
+        
+       <!--  <td><%= link_to 'Issue', '/issueBook/'+book.bookId.to_s%></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div >
+  <%= form_tag(controller: "admin", action: "issuetrue", method: "get") do %>
+  <br><br>
+  <h4 > <%= label_tag(:q, "Enter Details") %></h4>
+  
+  <div >
+        <%= text_field_tag :username, "",  placeholder: 'Enter Borrower\'s username' %>
+
+        <%= text_field_tag :bookId, "",  placeholder: 'Enter BookID' %>
+      
+  <% end %>
+   
+      <%= submit_tag("Issue" , :id=>"button", :class=>"btn-success", :name=>"submit") %>
+    </div>
+  
+</div>
+<% end %>
+<br>
+</div>
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<br>
+<div class="text-center">
+<%= link_to 'Back to Home', user_home %>
+</div>
+</div>

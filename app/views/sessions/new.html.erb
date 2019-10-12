@@ -1,3 +1,4 @@
+<% unless current_user %>
 <div class="text-center">
 <h2>Login Page</h2>  
     <%= form_tag('/login') do %>   
@@ -11,7 +12,12 @@
     </div>   
       <div>
 	<br>  
-        <%= submit_tag "Log In", class: "btn btn-primary" %>   
+        <%= submit_tag "Log In", class: "btn btn-success" %>   
     </div>   
     <% end %>  
 </div>
+<% else %>
+<div class="text-center alert alert-warning" role="alert">
+  User already logged in
+</div>
+<% end %>

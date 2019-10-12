@@ -87,9 +87,6 @@ class UsersController < ApplicationController
     end
 	render :new and return unless @user.valid?
 	session[:user_id] = @user.id
-	#redirect_to '/admin/'+@user.profile_id.to_s, notice: 'User was successfully created.' if params[:role] == 'admin'
-	#redirect_to '/student/'+@user.profile_id.to_s, notice: 'User was successfully created.' if params[:role] == 'student'
-	#redirect_to '/faculty/'+@user.profile_id.to_s, notice: 'User was successfully created.' if params[:role] == 'faculty'
 	redirect_to user_home
   end
 
@@ -97,7 +94,7 @@ class UsersController < ApplicationController
   def update
 
     @user = User.find_by id: params[:id]
-    if @user.profile_type == "AdminProfile"
+=begin    if @user.profile_type == "AdminProfile"
    	 	@user.password = params[:user][:password]
     		@user.password_confirmation = params[:user][:password_confirmation]
 		if @user.authenticate(params[:old_password])
@@ -143,7 +140,7 @@ class UsersController < ApplicationController
      	 		render :edit and return
    		end
      end
-
+=end
   end
   
 

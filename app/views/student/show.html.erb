@@ -2,13 +2,12 @@
 
 <div class="text-center">
 <h2>Student Page</h2>
-<%= link_to 'Edit Profile', edit_user_path(@user.id.to_s) %><br>
-<!-- <%= link_to 'Delete Profile',  '/users/'+@user.id.to_s,   method: :delete, data: { confirm: 'Are you sure?' } %> -->
-<br>
+
 <br>
 
-<%= link_to 'Search Books', '/books' %><br>
-<%= link_to 'View Issued Books', '/books' %><br>
+<%= link_to 'Search Book',:action=>:search,:id=>current_user.profile_id.to_s %><br>
+
+<%= link_to 'View Issued Books',:action=>:indexBookIssue,:id=>current_user.profile_id.to_s %><br>
 </div>
 
 <%else%>
@@ -17,7 +16,7 @@
   <p>You are not permitted to view this page!<p>
 </div>
 
-<%= link_to 'Back to Home', '/faculty/'+current_user.profile_id.to_s %>
+<%= link_to 'Back to Home', '/student/'+current_user.profile_id.to_s %>
 </div>
 <%end%>
 

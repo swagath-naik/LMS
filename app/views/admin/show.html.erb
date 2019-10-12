@@ -1,20 +1,24 @@
 <%if current_user.id == @user.id then%>
 <div class="text-center">
 <h2>Admin Page</h2>
+<hr>
 <!--
 <p>Username: <%= @user.username %><p>
 <p>Profile Type: <%= @user.profile_type %><p>
 -->
 
-<%= link_to 'Edit Profile', edit_user_path(@user.id.to_s) %><br>
-<%= link_to 'Delete Profile',  '/users/'+@user.id.to_s,   method: :delete, data: { confirm: 'Are you sure?' } %>
-<br>
 <br>
 
-<%= link_to 'Add Book Details', '/books' %><br>
-<%= link_to 'Remove Book Details', '/books' %><br>
-<%= link_to 'Update Book Details', '/books' %><br>
-<%= link_to 'Return Book', '/books' %><br>
+<%= link_to 'Add/Edit/Delete Book Details',:controller => "books",:action=>:index,:uid=>current_user.profile_id.to_s %><br>
+<br>
+<%= link_to 'Search Book',:action=>:search,:id=>current_user.profile_id.to_s %><br>
+<br>
+<%= link_to 'Issue Book',:action=>:issue,:id=>current_user.profile_id.to_s %><br>
+<br>
+<%= link_to 'View Issue Details ',:action=>:indexBookIssue,:id=>current_user.profile_id.to_s %><br>
+<br>
+<%= link_to 'Return Book', :action=>:return ,:id=>current_user.profile_id.to_s %><br>
+<br>
 </div>
 
 <%else%>
@@ -23,7 +27,7 @@
   <p>You are not permitted to view this page!<p>
 </div>
 
-<%= link_to 'Back to Home', '/admin/'+current_user.profile_id.to_s %>
+<%= link_to 'Back to Home', user_home %>
 </div>
 <%end%>
 

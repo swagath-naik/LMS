@@ -1,6 +1,17 @@
-<h1>Editing Book</h1>
+<div class="text-center">
+<%if current_user and current_user.admin? then%>
+<h3>Editing Book</h3>
 
 <%= render 'form', book: @book %>
-
+<br>
 <%= link_to 'Show', @book %> |
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', :action=>:index,:uid=>current_user.profile_id.to_s %><br>
+<%else%>
+<div class="text-center">
+<div class="alert alert-danger" role="alert">
+  <p>You are not permitted to view this page!<p>
+</div>
+<%end%>
+<br>
+<%= link_to 'Back to Home', user_home %>
+</div>

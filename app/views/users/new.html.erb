@@ -1,5 +1,12 @@
 <div class="text-center">
+<% unless current_user %>
 <h2>Sign Up Form</h2>
 
 <%= render 'form', user: @user %>
+
 </div>
+<% else %>
+<div class="text-center alert alert-warning" role="alert">
+  User already Signed up
+</div>
+<% end %>
