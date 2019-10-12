@@ -1,24 +1,22 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Library Management System
+### Software Requirements
+* Ubuntu
+* Ruby on Rails
+* My SQL Server
+### Database Setup
+* Set username and password in config/database.yml
+* Make database user can have sufficient permission to write
+### Default Admin key
+* 123456
+* This is the default admin key for registration
+### Run this command for intial setup
+```bash
+bundle
+yarn
+rails db:setup db:migrate
+```
+### Running the web application
+```bash
+rails s
+```
