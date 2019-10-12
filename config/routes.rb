@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   resources :student, only: [:show]
   resources :faculty, only: [:show]
   resources :sessions, only: [:new, :create, :destroy]  
-  get 'user_signup', to: 'users#new', as: 'signup'   
-  get 'login', to: 'sessions#new', as: 'login'  
+  get 'user_signup', to: 'users#new', as: 'signup'
+  post 'user_signup', to: 'users#create', as: 'signup_post'   
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'login', to: 'sessions#create', as: 'login_post'   
   get 'logout', to: 'sessions#destroy', as: 'logout'  
   resources :admins
   resources :users

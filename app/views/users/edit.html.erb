@@ -1,6 +1,12 @@
-<h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="text-center">
+<h2>Edit User Details</h2>
+<% if @user.profile_type == "AdminProfile" %>
+<%= render 'edit_admin_form', user: @user %>
+<% elsif @user.profile_type == "StudentProfile" %>
+<%= render 'edit_student_form', user: @user %>
+<% elsif @user.profile_type == "FacultyProfile" %>
+<%= render 'edit_faculty_form', user: @user %>
+<% else %>
+<p>Unknown Profile Type. </p>
+<%end%>
+</div>

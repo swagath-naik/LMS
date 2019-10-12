@@ -6,8 +6,9 @@
 <p>Profile Type: <%= @user.profile_type %><p>
 -->
 
-<%= link_to 'Edit Profile', '/books' %><br>
-<%= link_to 'Delete Profile', '/books' %><br>
+<%= link_to 'Edit Profile', edit_user_path(@user.id.to_s) %><br>
+<%= link_to 'Delete Profile',  '/users/'+@user.id.to_s,   method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
 <br>
 
 <%= link_to 'Add Book Details', '/books' %><br>

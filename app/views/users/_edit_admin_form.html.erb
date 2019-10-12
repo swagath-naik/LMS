@@ -1,0 +1,41 @@
+
+<%= form_with( model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div class="alert alert-danger" role="alert" id="error_explanation">
+      <h3><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h3>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %><br>
+    <%= form.text_field :username,:readonly => true %><br>
+  </div>
+
+  <div class="field">
+    <%= form.label :old_password %><br>
+    <%= form.password_field :old_password %><br>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_password %><br>
+    <%= form.password_field :password %><br>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_password_confirmation %><br>
+    <%= form.password_field :password_confirmation %><br>
+  </div>
+<br>
+  <div class="actions">
+    <%= form.submit  "Update", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+

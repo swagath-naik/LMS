@@ -1,8 +1,8 @@
 
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(url: "/user_signup", model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <div class="alert alert-danger" role="alert" id="error_explanation">
+      <h3><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h3>
 
       <ul>
         <% user.errors.full_messages.each do |message| %>
@@ -13,47 +13,52 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+    <%= form.label :username %><br>
+    <%= form.text_field :username %><br>
+  </div>
+
+
+
+  <div class="field">
+    <%= form.label :password %><br>
+    <%= form.password_field :password %><br>
   </div>
 
   <div class="field">
+    <%= form.label :password_confirmation %><br>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+
+ <div class="field">
+<p>Profile: </p>
 <%= radio_button_tag(:role, "admin") %>
 <%= label_tag(:role, "Admin") %>
 <%= radio_button_tag(:role, "student") %>
 <%= label_tag(:role, "Student") %>
 <%= radio_button_tag(:role, "faculty") %>
 <%= label_tag(:role, "Faculty") %>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+</div>
 
 <div id="admin_form" class="field inactive">
-    <%= form.label :"Admin Key" %>
-    <%= form.text_field :key %>
+    <%= form.label :"Admin Key" %><br>
+    <%= form.password_field :key %><br>
   </div>
 
 <div id="faculty_form" class="field inactive">
-    <%= form.label :"Faculty Name" %>
-    <%= form.text_field :fname %>
-    <%= form.label :"Designation" %>
-    <%= form.text_field :fdes %>
+    <%= form.label :"Faculty Name" %><br>
+    <%= form.text_field :fname %><br>
+    <%= form.label :"Designation" %><br>
+    <%= form.text_field :fdes %><br>
   </div>
 
 <div id="student_form" class="field inactive">
-    <%= form.label :"Student Name" %>
-    <%= form.text_field :sname %>
+    <%= form.label :"Student Name" %><br>
+    <%= form.text_field :sname %><br>
   </div>
-
+<br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  class: 'btn btn-primary' %>
   </div>
 <% end %>
 

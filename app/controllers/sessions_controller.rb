@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
         user = User.find_by_username(params[:username])   
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-	  redirect_to '/admin/'+user.profile_id.to_s  if user.profile_type == "AdminProfile"
-	  redirect_to '/student/'+user.profile_id.to_s if user.profile_type == "StudentProfile"
-	  redirect_to '/faculty/'+user.profile_id.to_s if user.profile_type == "FacultyProfile" 
-        else   
-          render :new   
+	  redirect_to user_home
+ 
+        else
+          flash.now.alert   = "Please check your username/password"
+          render :new  
         end 
   end
 
