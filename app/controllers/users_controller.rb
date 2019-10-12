@@ -114,6 +114,8 @@ class UsersController < ApplicationController
     if @user.profile_type == "StudentProfile"
    	 	@user.password = params[:user][:password]
     		@user.password_confirmation = params[:user][:password_confirmation]
+		@user.profile.sname = params[:user][:sname]
+		raise params.inspect
 		if @user.authenticate(params[:old_password])
 			if @user.save
 				redirect_to user_home, notice: 'User Profile was successfully updated.'

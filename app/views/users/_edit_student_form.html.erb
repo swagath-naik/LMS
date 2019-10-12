@@ -31,10 +31,16 @@
     <%= form.label :new_password_confirmation %><br>
     <%= form.password_field :password_confirmation %><br>
   </div>
-  <div class="field">
-    <%= form.label :"Student Name" %><br>
-    <%= form.text_field :sname %><br>
-  </div>
+
+
+<br>
+<%= form.fields_for :profile do |builder| %>
+    <div class="field">
+      <%= builder.label "Student Name" %><br>
+      <%= builder.text_field :sname %><br>
+    </div>
+  <% end %>
+
 
 <br>
   <div class="actions">

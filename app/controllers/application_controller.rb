@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
     "123456"   
   end
   def user_home
-    return '/admin/'+current_user.profile_id.to_s   if current_user.role=="admin"
-    return '/faculty/'+current_user.profile_id.to_s if current_user.role=="faculty"
-    return '/student/'+current_user.profile_id.to_s   if current_user.role=="student"
+    return '/admin/'+current_user.profile_id.to_s     if current_user and current_user.role=="admin"
+    return '/faculty/'+current_user.profile_id.to_s   if current_user and current_user.role=="faculty"
+    return '/student/'+current_user.profile_id.to_s   if current_user and current_user.role=="student"
     return "/"
      
   end
