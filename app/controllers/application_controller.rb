@@ -1,5 +1,16 @@
 class ApplicationController < ActionController::Base   
-  protect_from_forgery with: :exception   
+  protect_from_forgery with: :exception  
+
+  
+  def require_login
+    @cu=User.where(id: session[:user_id]).first
+    
+    if @cu==nil
+    flash[:danger]="Please Login ! "
+    redirect_to '/'
+    end
+  end
+
   private   
   def current_user   
     User.where(id: session[:user_id]).first   

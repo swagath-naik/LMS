@@ -43,10 +43,10 @@
             <% end %>
       
       <td><%= bookis.created_at.to_date %></td>  
-      <td><% nod= (($today)-(bookis.created_at.to_date)).to_i %>  <% nod+=1%> <%= nod%> 
+      <td><% nod= (($today)-(bookis.created_at.to_date)).to_i %>  <% nod%> <%= nod%> 
 
-        <% if nod >= 31
-            then dues= (nod-30)*2
+        <% if nod >= 91
+            then dues= (nod-90)*3
           else
             dues=0
           end

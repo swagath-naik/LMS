@@ -1,10 +1,10 @@
 class AdminController < ApplicationController
 
+  before_action :require_login 
+  
+
 def show
-if current_user ==nil
-    flash[:success]="Please Login."
-    redirect_to '/'
-  end
+
 #@profile=AdminProfile.find(params[:id])
 @user=User.find_by(profile_id: params[:id], profile_type: "AdminProfile")
 
@@ -20,11 +20,6 @@ def indexBookIssue
   @books=Book.all
 end
 
-def returnBook
-  @user=User.find_by(profile_id: params[:id], profile_type: "AdminProfile")
-  @bookIssue = BookIssue.all
-  @books=Book.all
-end
 
 def search
 #@profile=AdminProfile.find(params[:id])
@@ -67,28 +62,39 @@ end
   @userResult = User.where("username = ?",username)
 
   if @userResult.blank? 
-    flash[:success]="Book Issue Failed! Borrower username Not Registered."
+    flash[:danger]="Book Issue Failed! Borrower username Not Registered."
     redirect_to '/admin/'+current_user.profile_id.to_s and return
   end
 
   @book=Book.find_by(bookId: params[:bookId])
 
   if @book.blank? 
-    flash[:success]="Book Issue Failed! Wrong BookId."
+    flash[:danger]="Book Issue Failed! Wrong BookId."
     redirect_to '/admin/'+current_user.profile_id.to_s and return
   end
 
   if @book.issued 
-    flash[:success]="Book Issue Failed! Wrong BookId."
+    flash[:danger]="Book Issue Failed! Wrong BookId."
     redirect_to '/admin/'+current_user.profile_id.to_s and return
   end
+
+  @currIssuedBooks = BookIssue.where("username = ? ",username)
+
+  if @userResult[0].profile_type=="FacultyProfile" and @currIssuedBooks.size >=8
+    flash[:danger]="Book Cannot Be Issued! Max. Limit Reached For "+username
+    redirect_to '/admin/'+current_user.profile_id.to_s and return
+  elsif @userResult[0].profile_type=="StudentProfile" and @currIssuedBooks.size >=4
+    flash[:danger]="Book Cannot Be Issued! Max. Limit Reached For "+username
+    redirect_to '/admin/'+current_user.profile_id.to_s and return
+  end
+
 
   if @book.update_attributes(issued: true)
     @bookIssue=BookIssue.create(username: username, BookId: bookId)
     flash[:success]="Book Issued Successfully"
     redirect_to '/admin/'+current_user.profile_id.to_s
   else
-    flash[:error]="Book Issued Failed!"
+    flash[:danger]="Book Issued Failed!"
     redirect_to '/admin/'+current_user.profile_id.to_s
   
   end
@@ -96,14 +102,16 @@ end
 end
 
 def searchResult
+
   @user=User.find_by(profile_id: params[:id], profile_type: "AdminProfile")
+
 	searchKey = params[:searchKey]
   if  searchKey==nil
     redirect_to '/admin/'+current_user.profile_id.to_s and return
   end	
 	@bookResults = Book.where("lower(title) = ? OR lower(author) = ?",searchKey.downcase,searchKey.downcase)	
 	 	
-	render 'searchResult'
+	#render 'searchResult'
 	
 	#redirect_to controller:"parcels", action: "show", id: parcel_location
 end
