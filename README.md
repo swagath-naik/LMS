@@ -3,10 +3,8 @@
 ### Software Requirements
 * Ubuntu
 * Ruby on Rails
-* My SQL Server
-### Database Setup
-* Set username and password in config/database.yml
-* Make sure database user can have sufficient permission to read and write to the database
+* SQLite
+
 ### Default Admin key
 * 123456
 * This is the default admin key for registration
@@ -14,7 +12,7 @@
 ```bash
 bundle
 yarn
-rails db:setup db:migrate
+rails  db:migrate
 ```
 ### Running the web application
 ```bash
