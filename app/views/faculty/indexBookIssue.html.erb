@@ -11,8 +11,8 @@
     <h4>No Books Currently Issued</h4>
  <%else%>
 
-<table width="90%" class="new_table">
-<thead>
+<table width="90%" class="new_table table">
+<thead class="thead-light">
   <tr>
     <th>BookID</th>
     <th>Borrower Name</th>
@@ -55,5 +55,5 @@
 </div>
 <%end%>
 <br>
-<%= link_to 'Back to Home', '/faculty/'+current_user.profile_id.to_s %>
+<%= link_to 'Back to Home', user_home %>
 </div>

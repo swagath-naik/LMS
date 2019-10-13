@@ -8,8 +8,8 @@
     <h4>Sorry! No Books Found</h4>
  <%else%>
 
-<table width="60%" class="new_table">
-  <thead>
+<table width="90%" class="new_table table">
+<thead class="thead-light">
     <tr>
       <th>BookID</th>
       <th>Title</th>
@@ -40,5 +40,5 @@
 </table>
 <%end%>
 <br>
-<%= link_to 'Back to Home', '/faculty/'+current_user.profile_id.to_s %>
+<%= link_to 'Back to Home', user_home %>
 </div>
