@@ -46,7 +46,7 @@ class BooksController < ApplicationController
   def destroy
 
     if @book.issued 
-      flash[:success]="Delete Failed! Book Is Currently Issued."
+      flash[:danger]="Delete Failed! Book Is Currently Issued."
       redirect_to '/admin/'+current_user.profile_id.to_s and return
     end
 

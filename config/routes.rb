@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 	get 'login', to: 'sessions#new', as: 'login'
 	post 'login', to: 'sessions#create', as: 'login_post'   
 	get 'logout', to: 'sessions#destroy', as: 'logout'
-	get 'change_password', to: 'change_password#changePassword'   
-	post 'change_password', to: 'change_password#updatePassword'
+	#get 'change_password', to: 'change_password#changePassword'   
+	#post 'change_password', to: 'change_password#updatePassword'
 	resources :admins
 	resources :users
 	get 'welcome/index'
